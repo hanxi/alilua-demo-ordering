@@ -1,0 +1,31 @@
+<html lang="zh">
+
+    <head>
+        {{include header.html}}
+        <title>订餐</title>
+
+        <script>
+            jsonRPC.setup({endPoint: '/api',namespace: 'demo'});
+            jsonRPC.request('add', {
+                params: [123, 456],
+                success: function(result){
+                    console.log(result);
+                },
+                error: function(result) {
+                    console.log(result);
+                }
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+        <p>body 元素的内容会显示在浏览器中。</p>
+
+        <footer>
+        {{include footer.html}}
+        </footer>
+    </body>
+</html>
+
