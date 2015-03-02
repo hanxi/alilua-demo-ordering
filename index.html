@@ -5,9 +5,18 @@
         <title>订餐</title>
 
         <script>
-            jsonRPC.setup({endPoint: '/api',namespace: 'demo'});
-            jsonRPC.request('add', {
-                params: [123, 456],
+            jsonRPC.setup({endPoint: '/api',namespace: 'public'});
+            jsonRPC.request('get_user_list', {
+                params: [],
+                success: function(result){
+                    console.log(result);
+                },
+                error: function(result) {
+                    console.log(result);
+                }
+            });
+            jsonRPC.request('get_last_menu_list', {
+                params: [],
                 success: function(result){
                     console.log(result);
                 },
@@ -16,6 +25,47 @@
                 }
             });
 
+            function uploadImage()
+            {
+                var form = document.forms["uploadImageForm"];
+                if (form["file"].files.length > 0) {
+                    var file = form["file"].files[0];
+                    var reader = new FileReader();
+                    reader.onloadstart =  function(p) {
+                        console.log("onloadstart");
+                        document.getElementById("bytesTotal").textContent = file.size;
+                    }
+                    reader.onprogress = function(p) {
+                        console.log("onprogress");
+                        document.getElementById("bytesRead").textContent = p.loaded;
+                    }
+                    reader.onload = function() {
+                        console.log("load complete");
+                    }
+                    reader.onloadend = function()
+                    {
+                        if (reader.error) {
+                            console.log(reader.error);
+                        } else {
+                            document.getElementById("bytesRead").textContent = file.size;
+                            console.log(typeof(reader.result));
+                            jsonRPC.request('upload_menu', {
+                                params: [[{name:'a.png',data:reader.result}]],
+                                success: function(result) {
+                                    console.log(result);
+                                },
+                                error: function(result) {
+                                    console.log(result);
+                                }
+                            });
+                        }
+                    }
+                    reader.readAsBinaryString(file);
+                } else {
+                    alert("请选择文件");
+                }
+            }
+
         </script>
 
     </head>
@@ -23,6 +73,15 @@
     <body>
         <p>body 元素的内容会显示在浏览器中。</p>
 
+ <p> 
+ <!-- 用于文件上传的表单元素 --> 
+ <form name="uploadImageForm" action="javascript: uploadImage();" method="post" enctype="multipart/form-data">
+ <p>Upload File: <input type="file" name="file" /></p> 
+ <p><input type="submit" value="Submit" /></p> 
+ </form> 
+ <div>Progessing (in Bytes): <span id="bytesRead"> </span> / <span id="bytesTotal"></span> 
+ </div> 
+ </p> 
         <footer>
         {{include footer.html}}
         </footer>
