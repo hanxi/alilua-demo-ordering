@@ -22,25 +22,19 @@ local apis = {
             end
             return json_encode(res)
         end,
-        upload_menu = function (image_datas)
+        upload_menu = function (menupaths)
             local uploadtime = os.time()
             conn = db.connect()
-            for _,image in pairs(image_datas) do
-                local names = explode(image.name,".")
-                local suffix = names[#names]
-                local menu_name = random_string()
-                local menupath = "/menu/"..menu_name.."."..suffix
+            for _,menupath in pairs(menupaths) do
                 local res, err, errno, sqlstate = conn:add_menu(menupath, uploadtime)
-
-                local menu_path = __root..menupath
-                _print(menu_path)
+                _print(menupath)
             end
+            return "上传成功"
         end,
         ordering = function (user_name, dish_name, dish_price)
         end,
     },
 }
-local req,r = read_request_body()
-_print(type(req),req,type(r),r)
+local req = read_request_body()
 jsonrpc_handle(json_decode(req), apis)
 

@@ -28,7 +28,7 @@ function _M:get_last_menu_list()
 end
 
 function _M:add_menu(menupath, uploadtime)
-    menupath = string.gsub(uploadtime,"['\"]",function (x) return x..x end)
+    menupath = string.gsub(menupath,"['\"]",function (x) return x..x end)
     uploadtime = tonumber(uploadtime)
     return self.db:query(sprintf("insert into menu(menupath,uploadtime) values ('%s','%d')",menupath,uploadtime))
 end

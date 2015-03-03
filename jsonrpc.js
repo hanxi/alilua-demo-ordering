@@ -61,7 +61,6 @@ jsonRPC = {
         }
         xmlhttp.open("POST",this._requestUrl((this.endPoint || options.url), options.cache), true);
         xmlhttp.overrideMimeType("application/octet-stream");
-        console.log(data);
         xmlhttp.send(data);
     },
     // Handles calling of error callback function
