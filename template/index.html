@@ -1,0 +1,38 @@
+<html>
+
+    <head>
+        {{include header.html}}
+        <title>订餐</title>
+
+        <script>
+            function onload() {
+                jsonRPC.setup({endPoint: '/script/api',namespace: 'public'});
+                loadmenulist();
+            }
+        </script>
+
+    </head>
+
+    <body onload="onload()">
+        <h1>订餐系统</h1>
+
+        <p>上传菜单: <input type="file" multiple id="file" onchange="fileselectchanged()"/>
+        <input type="button" value="上传" onclick="uploadImages()" />
+        <input type="button" value="生成Excel" onclick="generateExcel()" /></p>
+        <a href="" id='csv' style="display:none">xxxxxxxxxx</a>
+
+        <div id="imglist">
+        </div>
+
+        <div id="menuview">
+        </div>
+
+        <div id="userlistview">
+        </div>
+
+        <footer>
+        {{include footer.html}}
+        </footer>
+    </body>
+</html>
+
