@@ -1,7 +1,7 @@
 
 function write_file(file_name)
     if file_name then
-        local fname = '/uploadfile/'..random_string()..file_name
+        local fname = '/uploaddir/'..random_string()..file_name
         local fpath = __root..fname
         if eio.exists(fpath) then
             eio.unlink(fpath)

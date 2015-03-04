@@ -21,3 +21,7 @@ start()
 stop
 start
 
+if [ ! -d $filepath/uploaddir ]; then
+    mkdir $filepath/uploaddir
+fi
+
