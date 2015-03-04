@@ -1,0 +1,3 @@
+[submodule "alilua"]
+	path = alilua
+	url = git@github.com:hanxi/alilua.git
