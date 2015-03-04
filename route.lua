@@ -14,7 +14,11 @@ routes['^/user/:user_id/:post(.+)'] = function(r)
 end
 
 routes['^/(.*)'] = function(r)
-    dofile('/index.lua')
+    dofile('/scripts/index.lua')
+end
+
+routes['^/script/:file(.*)'] = function(r)
+    dofile('/scripts/'..r.file..'.lua')
 end
 
 --[[
@@ -22,7 +26,9 @@ others you want :)
 ]]
 
 -- if the 3rd argument is a path, then router will try to get local lua script file first
-if not router(headers.uri, routes, '/') then
+local ok, err, arg = router(headers.uri, routes, '/')
+if not ok then
     header('HTTP/1.1 404 Not Found')
     echo('File Not Found!')
 end
+
