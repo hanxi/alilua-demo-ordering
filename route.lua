@@ -17,7 +17,7 @@ routes['^/(.*)'] = function(r)
     dofile('/scripts/index.lua')
 end
 
-routes['^/script/:file(.*)'] = function(r)
+routes['^/scripts/:file(.*)'] = function(r)
     dofile('/scripts/'..r.file..'.lua')
 end
 

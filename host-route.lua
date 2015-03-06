@@ -8,5 +8,6 @@ config['auto-reload-vhost-conf']    = 0             --0 second (<10 sec to disab
 config['lua-path'] = '/home/hlm-devel/www/ordering/scripts/?.lua;'  -- for package.path
 
 host_route['*'] = '/home/hlm-devel/www/ordering/route.lua'
+host_route['*x'] = '/home/hlm-devel/www/xls2lua/route.lua'
 --host_route['*z.com'] = '/var/www/z.com/index.lua'
 
